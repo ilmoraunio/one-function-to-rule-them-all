@@ -1,7 +1,11 @@
 (ns one-function-to-rule-them-all)
 
 (defn concat-elements [a-seq]
-  :-)
+  (reduce (fn [a b] (loop [coll b
+                           acc a]
+                      (if (empty? coll)
+                        acc
+                        (recur (rest coll) (conj acc (first coll)))))) [] a-seq))
 
 (defn str-cat [a-seq]
   :-)
