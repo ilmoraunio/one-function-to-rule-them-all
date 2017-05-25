@@ -8,7 +8,7 @@
                         (recur (rest coll) (conj acc (first coll)))))) [] a-seq))
 
 (defn str-cat [a-seq]
-  :-)
+  (reduce str (concat-elements (interpose " " a-seq))))
 
 (defn my-interpose [x a-seq]
   [:-])
