@@ -63,5 +63,12 @@
   ([p1? p2? & preds] (fn [x]
                        (reduce (fn [a b] (and a (b x))) (and (p1? x) (p2? x)) preds))))
 
-(defn my-map [f a-seq]
-  [:-])
+(defn my-map
+  ([f a-seq] (reduce (fn [a b] (concat a [(f b)])) () a-seq))
+  ([f a-seq & a-seqs] (loop [colls (concat (list a-seq) a-seqs)
+                             acc (empty a-seqs)]
+                        (if (every? (complement nil?)
+                                    (map (partial not-empty) colls))
+                          (recur (my-map rest colls)
+                                 (concat acc [(apply f (my-map first colls))]))
+                          acc))))
