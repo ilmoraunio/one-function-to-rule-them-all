@@ -53,7 +53,6 @@
 (defn my-*
   ([] 1)
   ([x] x)
-  ([x y] (* 4 3))
   ([x y & more] (reduce * (* x y) more)))
 
 (defn pred-and
